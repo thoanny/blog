@@ -56,7 +56,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
 
     return {
       posts: data.category.posts.nodes,
-      category: data.category
+      category: data.category.name
     };
   }
 

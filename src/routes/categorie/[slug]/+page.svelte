@@ -4,7 +4,11 @@
   export let data: PageData;
 </script>
 
+<svelte:head>
+	<title>Catégorie : {data.category}</title>
+</svelte:head>
+
 <div>
-  <h1 class="text-4xl mb-6 font-bold">Catégorie&nbsp;: {data.category.name}</h1>
+  <h1 class="text-4xl mb-6 font-bold">Catégorie&nbsp;: {data.category}</h1>
   <Posts {...data} />
 </div>

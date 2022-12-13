@@ -6,6 +6,10 @@
   export const post = data.post;
 </script>
 
+<svelte:head>
+	<title>{post.title}</title>
+</svelte:head>
+
 <div>
   <article>
     <div class="metas metas--header">
