@@ -5,25 +5,25 @@ export const load: PageLoad = async ({ fetch }) => {
 
   const query = `
     query Posts {
-    posts {
+      posts(where: {status: PUBLISH}) {
         nodes {
-        slug
-        title
-        excerpt
-        featuredImage {
+          slug
+          title
+          excerpt
+          featuredImage {
             node {
-            mediaItemUrl
-            altText
-            mediaDetails {
-                height
+              altText
+              mediaItemUrl
+              mediaDetails {
                 width
+                height
+              }
             }
-            }
+          }
         }
-        }
+      }
     }
-    }
-    `;
+`;
 
 
   const response = await fetch(PUBLIC_GRAPHQL_URL, {

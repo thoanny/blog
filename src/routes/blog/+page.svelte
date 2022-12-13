@@ -1,11 +1,10 @@
 <script lang="ts">
     import type { PageData } from './$types';
+    import Posts from '$lib/Posts.svelte';
     export let data: PageData;
 </script>
 
 <div>
-    <h1>Blog</h1>
-    {#each data.posts as post}
-        <li><a href="/blog/{post.slug}">{post.title}</a></li>
-    {/each}
+    <h1 class="text-4xl mb-6 font-bold">Blog</h1>
+    <Posts {...data} />
 </div>

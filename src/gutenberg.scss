@@ -1,0 +1,280 @@
+#content {
+
+    > * {
+        @apply my-8;
+    }
+
+    > p,
+    > h1,
+    > h2, 
+    > h3,
+    > h4, 
+    > h5, 
+    > h6, 
+    > ul, 
+    > ol,
+    > [class*="wp-block-"] {
+        @apply max-w-2xl mx-auto;
+
+        &.alignwide  {
+            @apply max-w-7xl;
+        }
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold;
+    }
+
+    h1 {
+        @apply text-6xl;
+    }
+
+    h2 {
+        @apply text-5xl;
+    }
+
+    h3 {
+        @apply text-4xl;
+    }
+
+    h4 {
+        @apply text-3xl;
+    }
+
+    h5 {
+        @apply text-2xl;
+    }
+
+    h6 {
+        @apply text-xl;
+    }
+
+    kbd {
+        @apply kbd kbd-sm;
+    }
+
+    .wp-block-pullquote {
+        @apply border-primary relative my-24 text-center;
+        border-width: 3px;
+        border-right: none;
+        border-left: none;
+
+        blockquote {
+            @apply my-12 px-4 text-4xl font-semibold text-primary;
+
+            &:before, &:after {
+                @apply h-16 w-16 block absolute;
+                content: '';
+                z-index: -1;
+            }
+    
+            &:before {
+                @apply -top-10 left-4;
+                background: url('/quote-left-solid.svg') no-repeat 0 0;
+            }
+    
+            &:after {
+                @apply -bottom-10 right-2;
+                background: url('/quote-right-solid.svg') no-repeat 0 0;
+            }
+
+            cite {
+                @apply text-gray-400 font-normal text-lg;
+
+                &:before {
+                    content: '— '
+                }
+            }
+        }               
+    }
+
+    .wp-block-quote {
+        @apply py-5 px-14 font-semibold relative;
+
+        &:before, &:after {
+            @apply h-12 w-12 block opacity-50 absolute;
+            content: '';
+            z-index: -1;
+        }
+
+        &:before {
+            @apply top-0 left-0;
+            background: url('/quote-left-solid.svg') no-repeat 0 0;
+        }
+
+        &:after {
+            @apply bottom-0 -right-2;
+            background: url('/quote-right-solid.svg') no-repeat 0 0;
+        }
+
+        cite {
+            @apply text-gray-400 font-normal;
+
+            &:before {
+                content: '— '
+            }
+        }
+    }
+
+    .wp-block-file {
+        @apply bg-primary p-6 rounded-xl flex justify-center gap-4 items-center text-white;
+
+        .wp-element-button {
+            @apply btn btn-accent;
+        }
+    }
+
+    .wp-block-media-text {
+        @apply grid gap-8;
+        grid-template-columns:50% auto
+    }
+
+    .wp-block-embed {
+        &.is-type-video {
+            iframe {
+                @apply w-full h-full aspect-video rounded-xl;
+            }
+        }
+    }
+
+    .wp-block-image {
+        img {
+            @apply rounded-xl;
+        }
+    }
+
+    .wp-block-cover {
+        @apply relative h-full flex items-center justify-center rounded-xl overflow-hidden;
+        min-height: 430px;
+
+        &__image-background {
+            @apply absolute w-full h-full top-0 left-0 object-cover z-10;
+        }
+
+        &__background {
+            @apply bg-black w-full h-full z-20 block absolute opacity-50;
+        }
+
+        &__inner-container {
+            @apply relative z-30 p-4 text-white flex flex-col h-full items-center;
+        }
+    }
+
+    .wp-block-table {
+
+        table {
+            @apply table w-full text-base;
+
+            thead, tfoot {
+                th, td {
+                    @apply bg-primary;
+                }
+            }
+        }
+
+        &.is-style-stripes {
+            table {
+                @apply table-zebra;
+            }
+        }
+    }
+
+    figure {
+        &.wp-block-gallery {
+            @apply grid gap-4;
+
+            &.columns-2 {
+                @apply grid-cols-2;
+            }
+
+            &.columns-3 {
+                @apply grid-cols-3;
+            }
+
+            &.columns-4 {
+                @apply grid-cols-4;
+            }
+
+            &.columns-5 {
+                @apply grid-cols-5;
+            }
+
+            &.columns-6 {
+                @apply grid-cols-6;
+            }
+
+            &.columns-7 {
+                @apply grid-cols-7;
+            }
+
+            &.columns-8 {
+                @apply grid-cols-8;
+            }
+
+            .blocks-gallery-caption {
+                @apply col-span-full mt-0;
+            }
+
+            figure  {
+                figcaption {
+                    display: none;
+                }
+
+                img  {
+                    @apply w-full h-full object-cover rounded-xl shadow;
+                }
+            }
+        }
+
+        &.wp-block-image {
+            img {
+                @apply mx-auto w-full;
+            }
+        }
+    }
+
+    figcaption {
+        &.wp-element-caption {
+            @apply text-base text-gray-400 italic mt-4 text-center;
+        }
+    }
+
+    .wp-element-button {
+        @apply btn btn-primary;
+    }
+
+    .is-layout-flex {
+        @apply flex gap-4;
+    }
+
+    .is-vertically-aligned-center {
+        @apply items-center;
+    }
+
+    .is-vertically-aligned-bottom {
+        @apply items-end;
+    }
+
+    .is-image-fill  {
+        figure {
+            @apply w-full h-full bg-cover;
+            min-height: 250px;
+
+            img {
+                display: none;
+            }
+        }
+    }
+
+    .has-text-align-center {
+        @apply text-center;
+    }
+
+    .has-text-align-right {
+        @apply text-right;
+    }
+
+    .has-text-align-left {
+        @apply text-left;
+    }
+}

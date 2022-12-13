@@ -4,45 +4,45 @@ import { PUBLIC_GRAPHQL_URL } from '$env/static/public'
 export const load: PageLoad = async ({ params, fetch }) => {
 
   const query = `
-    query Post($slug: String = "hello-world") {
-        postBy(slug: $slug) {
+    query Post($id: ID!) {
+      post(id: $id, idType: SLUG) {
         title
         content
         date
         featuredImage {
-            node {
+          node {
             altText
-            sourceUrl
+            mediaItemUrl
+            mediaDetails {
+              width
+              height
             }
+          }
         }
         categories {
-            nodes {
+          nodes {
             name
             slug
-            }
+          }
         }
         tags {
-            nodes {
-            slug
+          nodes {
             name
-            }
+            slug
+          }
         }
         author {
-            node {
+          node {
             avatar {
-                default
-                url
+              url
             }
-            nicename
+            name
             description
-            nickname
-            username
-            }
-        }
-        }
+          }
+        }        
+      }
     }
-    `;
-
+  `;
 
   const response = await fetch(PUBLIC_GRAPHQL_URL, {
     method: 'POST',
@@ -50,13 +50,16 @@ export const load: PageLoad = async ({ params, fetch }) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ 
-        query
+        query: query,
+        variables: {
+          'id': params.slug
+        }
     }),
   });
 
   if (response.ok) {
     const responseObj = await response.json();
-    const post = responseObj.data.postBy;
+    const post = responseObj.data.post;
 
     return {
       post: post
