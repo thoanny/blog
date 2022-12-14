@@ -1,14 +1,16 @@
 <script lang="ts">
+  import { stripHtml } from "string-strip-html";
+  import { page } from '$app/stores';
   import type { PageData } from './$types';
-  import '../../../gutenberg.scss';
+
+  import SEO from '$lib/SEO.svelte';
 
   export let data: PageData;
   export const post = data.post;
+
 </script>
 
-<svelte:head>
-	<title>{post.title}</title>
-</svelte:head>
+<SEO {...data.seo} />
 
 <div>
   <article>

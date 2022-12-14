@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-/** Gutemberg **/
+.container {
+    @apply mx-auto max-w-6xl relative my-12 px-4;
+}
