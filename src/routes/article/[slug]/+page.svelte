@@ -24,7 +24,7 @@
     </div>
     <h1>{post.title}</h1>
     {#if post.featuredImage}
-      <img src="{post.featuredImage.node.mediaItemUrl}" alt="{post.featuredImage.node.altText}" class="rounded-xl">
+      <img src="{post.featuredImage.node.mediaItemUrl}" alt="{post.featuredImage.node.altText}" class="rounded-xl w-full h-full">
     {/if}
     <div id="content">
       {@html post.content}

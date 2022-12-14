@@ -12,6 +12,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
           nodes {
             slug
             title
+            date
             excerpt
             featuredImage {
               node {
