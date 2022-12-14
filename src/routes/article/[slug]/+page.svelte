@@ -1,12 +1,14 @@
 <script lang="ts">
   import { stripHtml } from "string-strip-html";
-  import { page } from '$app/stores';
+  import { readingTime } from 'reading-time-estimator';
   import type { PageData } from './$types';
 
   import SEO from '$lib/SEO.svelte';
 
   export let data: PageData;
   export const post = data.post;
+
+  const timeToRead = readingTime(stripHtml(post.content).result, 195, 'fr');
 
 </script>
 
@@ -23,6 +25,7 @@
           {/each}
         </span>
       {/if}
+      <span>{timeToRead.minutes} min. à lire</span>
     </div>
     <h1>{post.title}</h1>
     {#if post.featuredImage}
@@ -58,7 +61,7 @@
       @apply flex justify-center gap-4;
 
       &--header {
-        @apply text-sm uppercase font-semibold text-gray-400;
+        @apply text-sm uppercase font-semibold text-gray-400 mb-4;
 
         a {
           @apply text-gray-900;
