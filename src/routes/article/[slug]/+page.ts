@@ -41,7 +41,39 @@ export const load: PageLoad = async ({ params, fetch }) => {
             name
             description
           }
-        }        
+        }
+        commentStatus
+        commentCount
+        comments(where: {orderby: COMMENT_DATE, order: ASC, parentIn: "null"}) {
+          nodes {
+            date
+            content
+            author {
+              node {
+                avatar {
+                  height
+                  url
+                  width
+                }
+                name
+              }
+            }
+            replies {
+              nodes {
+                date
+                content
+                author {
+                  node {
+                    avatar {
+                      url
+                    }
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }      
       }
     }
   `;
