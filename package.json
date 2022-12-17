@@ -42,6 +42,8 @@
 	"dependencies": {
 		"daisyui": "^2.42.1",
 		"reading-time-estimator": "^1.7.2",
-		"string-strip-html": "^13.0.2"
+		"string-strip-html": "^13.0.2",
+		"svelte-forms-lib": "^2.0.1",
+		"yup": "^0.32.11"
 	}
 }

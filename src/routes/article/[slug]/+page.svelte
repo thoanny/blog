@@ -4,15 +4,12 @@
   import type { PageData } from './$types';
 
   import SEO from '$lib/SEO.svelte';
+  import AddComment from '$lib/AddComment.svelte';
 
   export let data: PageData;
   export const post = data.post;
 
   const timeToRead = readingTime(stripHtml(post.content).result, 150, 'fr');
-
-  function addComment() {
-    
-  }
 
 </script>
 
@@ -78,17 +75,17 @@
   </article>
 
   <div id="comments">
-
-
     {#if post.comments}
       <div id="comments-list">
         {#each post.comments.nodes as comment}
-          <div class="chat chat-start">
-            <div class="chat-image avatar">
-              <div class="w-10 rounded-full">
-                <img src="{comment.author.node.avatar.url}" alt="{comment.author.node.name}" />
+          <div class="chat chat-start mt-8">
+            {#if comment.author.node.avatar}
+              <div class="chat-image avatar">
+                <div class="w-10 rounded-full">
+                  <img src="{comment.author.node.avatar.url}" alt="{comment.author.node.name}" />
+                </div>
               </div>
-            </div>
+            {/if}
             <div class="chat-header pl-4 mb-1">
               {comment.author.node.name}
               <time class="text-xs opacity-50">
@@ -100,11 +97,13 @@
           {#if comment.replies}
             {#each comment.replies.nodes as reply}
               <div class="chat chat-end">
-                <div class="chat-image avatar">
-                  <div class="w-10 rounded-full">
-                    <img src="{reply.author.node.avatar.url}" alt="{reply.author.node.name}" />
+                {#if reply.author.node.avatar}
+                  <div class="chat-image avatar">
+                    <div class="w-10 rounded-full">
+                      <img src="{reply.author.node.avatar.url}" alt="{reply.author.node.name}" />
+                    </div>
                   </div>
-                </div>
+                {/if}
                 <div class="chat-header pl-4 mb-1">
                   {reply.author.node.name}
                   <time class="text-xs opacity-50">
@@ -120,47 +119,7 @@
     {/if}
 
     {#if post.commentStatus == 'open'}
-      <form class="shadow-xl rounded-xl p-4 border" on:submit|preventDefault={addComment}>
-        <h2 class="text-2xl mb-2 font-semibold">Ajouter un commentaire</h2>
-        <div class="flex gap-4">
-          <div class="form-control w-full">
-            <label class="label" for="comment-name">
-              <span class="label-text">Pseudonyme</span>
-            </label>
-            <input type="text" placeholder="John Doe" id="comment-name" class="input input-bordered w-full" />
-          </div>
-          <div class="form-control w-full">
-            <label class="label" for="comment-email">
-              <span class="label-text">Adresse e-mail</span>
-            </label>
-            <input type="text" placeholder="john.doe@fai.ext" id="comment-email" class="input input-bordered w-full" />
-          </div>
-        </div>
-        <div class="form-control">
-          <label class="label" for="comment-content">
-            <span class="label-text">Commentaire</span>
-          </label> 
-          <textarea class="textarea textarea-bordered h-36" id="comment-content" placeholder=""></textarea>
-        </div>
-        <div class="form-control mt-1">
-          <label class="label cursor-pointer justify-start gap-2">
-            <input type="checkbox" class="toggle toggle-primary" />
-            <span class="label-text">Enregistrer mon pseudonyme et adresse e-mail</span>
-            <div class="tooltip" data-tip="Ton pseudonyme et ton adresse e-mail sont enregistrés dans ton navigateur pour plus tard.">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />
-              </svg>              
-            </div>
-          </label>
-        </div>
-        <div class="form-control">
-          <label class="label cursor-pointer justify-start gap-2">
-            <input type="checkbox" class="toggle toggle-primary" required />
-            <span class="label-text">J'accepte la politique de confidentialité</span>
-          </label>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block mt-2">Envoyer mon commentaire</button>
-      </form>
+      <AddComment postId={post.databaseId} />
     {/if}
   </div>
 </div>
@@ -202,12 +161,8 @@
   }
 
   #comments {
-    form, #comments-list {
+    #comments-list {
       @apply max-w-2xl mx-auto my-8;
-
-      input, textarea {
-        @apply text-sm;
-      }
     }
   }
 </style>

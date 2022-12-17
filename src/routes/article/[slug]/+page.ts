@@ -7,6 +7,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
   const query = `
     query Post($id: ID!) {
       post(id: $id, idType: SLUG) {
+        databaseId
         title
         excerpt
         content
@@ -51,9 +52,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
             author {
               node {
                 avatar {
-                  height
                   url
-                  width
                 }
                 name
               }
@@ -111,11 +110,8 @@ export const load: PageLoad = async ({ params, fetch }) => {
     };
   }
 
-  
-
-  return {
-    status: response.status,
-    error: new Error(`Could not load ${url}`),
-  }
+  throw error(response.status, {
+    message: response.statusText
+  });
 
 }
