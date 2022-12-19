@@ -12,6 +12,12 @@
 				{#each menu as item}
 					<a href={item.uri} target={item.target} class={item.cssClasses.join(' ')}>{item.label}</a>
 				{/each}
+				<a
+					class="btn btn-accent rounded-full"
+					href="https://ko-fi.com/thoanny"
+					target="_blank"
+					rel="noreferrer">☕ Me soutenir</a
+				>
 			</nav>
 		{/if}
 	</div>
