@@ -24,6 +24,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
                 }
               }
             }
+            categories {
+              nodes {
+                name
+              }
+            }
+            commentCount
           }
         }
       }
@@ -36,12 +42,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ 
-        query: query,
-        variables: {
-          id: params.slug,
-          name: params.slug
-        }
+    body: JSON.stringify({
+      query: query,
+      variables: {
+        id: params.slug,
+        name: params.slug
+      }
     }),
   });
 
@@ -49,7 +55,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     const responseObj = await response.json();
     const data = responseObj.data;
 
-    if(!data.category) {
+    if (!data.category) {
       throw error(404, {
         message: 'Catégorie introuvable...'
       });

@@ -24,6 +24,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
                 }
               }
             }
+            categories {
+              nodes {
+                name
+              }
+            }
+            commentCount
           }
         }
       }
@@ -36,11 +42,11 @@ export const load: PageLoad = async ({ params, fetch }) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ 
-        query: query,
-        variables: {
-          id: params.slug
-        }
+    body: JSON.stringify({
+      query: query,
+      variables: {
+        id: params.slug
+      }
     }),
   });
 
@@ -48,7 +54,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     const responseObj = await response.json();
     const data = responseObj.data;
 
-    if(!data.tag) {
+    if (!data.tag) {
       throw error(404, {
         message: 'Mot-clé introuvable...'
       });
