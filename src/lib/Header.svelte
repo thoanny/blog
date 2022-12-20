@@ -25,7 +25,7 @@
 
 <style lang="scss">
 	header {
-		@apply relative h-32 bg-primary;
+		@apply relative h-32 bg-primary px-4 overflow-hidden;
 
 		.logo {
 			@apply h-36 absolute -top-2 left-0 opacity-25;
@@ -33,15 +33,7 @@
 		}
 
 		nav {
-			@apply absolute top-0 right-0 flex gap-6 h-32 items-center font-semibold text-white uppercase tracking-wider;
-
-			a {
-				&:hover {
-					span {
-						text-decoration: underline;
-					}
-				}
-			}
+			@apply absolute top-0 right-0 hidden lg:flex gap-6 h-32 items-center font-semibold text-white uppercase tracking-wider;
 		}
 	}
 </style>
