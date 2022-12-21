@@ -197,7 +197,7 @@
 		@apply text-lg;
 
 		.metas {
-			@apply flex justify-center gap-4;
+			@apply flex flex-wrap justify-center gap-4 whitespace-nowrap;
 
 			&--header {
 				@apply text-sm uppercase font-semibold text-gray-900 mb-4;
