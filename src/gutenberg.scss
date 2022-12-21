@@ -140,8 +140,12 @@
     }
 
     .wp-block-media-text {
-        @apply grid gap-8;
-        grid-template-columns: 50% auto
+        @apply flex flex-col gap-4 md:grid md:gap-8;
+        grid-template-columns: 50% auto;
+
+        img {
+            @apply rounded-xl;
+        }
     }
 
     .wp-block-embed {
