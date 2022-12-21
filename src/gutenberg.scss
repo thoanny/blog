@@ -1,27 +1,32 @@
 #content {
 
-    > * {
+    >* {
         @apply my-8;
     }
 
-    > p,
-    > h1,
-    > h2, 
-    > h3,
-    > h4, 
-    > h5, 
-    > h6, 
-    > ul, 
-    > ol,
-    > [class*="wp-block-"] {
+    >p,
+    >h1,
+    >h2,
+    >h3,
+    >h4,
+    >h5,
+    >h6,
+    >ul,
+    >ol,
+    >[class*="wp-block-"] {
         @apply max-w-2xl mx-auto;
 
-        &.alignwide  {
+        &.alignwide {
             @apply max-w-7xl;
         }
     }
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
         @apply font-bold;
     }
 
@@ -53,6 +58,10 @@
         @apply kbd kbd-sm;
     }
 
+    .wp-block-info {
+        @apply py-6 px-8 rounded-2xl border shadow-xl;
+    }
+
     .wp-block-pullquote {
         @apply border-primary relative my-24 text-center;
         border-width: 3px;
@@ -62,17 +71,18 @@
         blockquote {
             @apply my-12 px-4 text-4xl font-semibold text-primary;
 
-            &:before, &:after {
+            &:before,
+            &:after {
                 @apply h-16 w-16 block absolute;
                 content: '';
                 z-index: -1;
             }
-    
+
             &:before {
                 @apply -top-10 left-4;
                 background: url('/quote-left-solid.svg') no-repeat 0 0;
             }
-    
+
             &:after {
                 @apply -bottom-10 right-2;
                 background: url('/quote-right-solid.svg') no-repeat 0 0;
@@ -85,13 +95,14 @@
                     content: '— '
                 }
             }
-        }               
+        }
     }
 
     .wp-block-quote {
         @apply py-5 px-14 font-semibold relative;
 
-        &:before, &:after {
+        &:before,
+        &:after {
             @apply h-12 w-12 block opacity-50 absolute;
             content: '';
             z-index: -1;
@@ -126,7 +137,7 @@
 
     .wp-block-media-text {
         @apply grid gap-8;
-        grid-template-columns:50% auto
+        grid-template-columns: 50% auto
     }
 
     .wp-block-embed {
@@ -165,8 +176,11 @@
         table {
             @apply table w-full text-base;
 
-            thead, tfoot {
-                th, td {
+            thead,
+            tfoot {
+
+                th,
+                td {
                     @apply bg-primary;
                 }
             }
@@ -215,12 +229,12 @@
                 @apply col-span-full mt-0;
             }
 
-            figure  {
+            figure {
                 figcaption {
                     display: none;
                 }
 
-                img  {
+                img {
                     @apply w-full h-full object-cover rounded-xl shadow;
                 }
             }
@@ -255,7 +269,7 @@
         @apply items-end;
     }
 
-    .is-image-fill  {
+    .is-image-fill {
         figure {
             @apply w-full h-full bg-cover;
             min-height: 250px;
