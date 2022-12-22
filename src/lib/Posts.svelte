@@ -37,17 +37,17 @@
 
 		<div class="mt-8">
 			{#each otherPosts as post}
-				<a class="flex gap-8 mt-6 items-center post-block" href="/article/{post.slug}">
+				<a class="flex flex-col md:flex-row gap-4 md:gap-8 mt-6 items-center post-block" href="/article/{post.slug}">
 					{#if post.featuredImage}
-						<figure class="w-1/6">
+						<figure class="w-full md:w-48 shrink-0 self-start">
 							<img
 								src={post.featuredImage.node.mediaItemUrl}
-								class="object-cover w-full h-full rounded-xl aspect-square"
+								class="object-cover w-full h-full rounded-xl aspect-video md:aspect-square"
 								alt="Shoes"
 							/>
 						</figure>
 					{/if}
-					<div class="{post.featuredImage ? 'w-5/6' : 'w-full'} flex flex-col gap-2">
+					<div class="w-full flex flex-col gap-2">
 						<h2 class="text-lg font-bold">{post.title}</h2>
 						{@html post.excerpt}
 						<div class="metas">
