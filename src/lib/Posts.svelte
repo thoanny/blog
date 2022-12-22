@@ -43,7 +43,8 @@
 							<img
 								src={post.featuredImage.node.mediaItemUrl}
 								class="object-cover w-full h-full rounded-xl aspect-video md:aspect-square"
-								alt="Shoes"
+								alt="{post.title}"
+								loading="lazy"
 							/>
 						</figure>
 					{/if}
