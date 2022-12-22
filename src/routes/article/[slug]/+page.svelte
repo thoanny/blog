@@ -216,7 +216,7 @@
 		}
 
 		h1 {
-			@apply text-6xl font-bold text-center mb-12 mt-2;
+			@apply text-4xl sm:text-6xl font-bold text-center mb-12 mt-2;
 		}
 
 		.author {
