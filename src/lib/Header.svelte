@@ -3,7 +3,7 @@
 </script>
 
 <header>
-	<div class="container !my-0">
+	<div class="container h-full !my-0">
 		<div class="logo">
 			<img src="/logo.svg" class="w-full h-full" alt="Thoanny" />
 		</div>
@@ -28,7 +28,7 @@
 		@apply relative h-32 bg-primary px-4 overflow-hidden;
 
 		.logo {
-			@apply h-36 absolute -top-2 left-0 opacity-25;
+			@apply relative h-36 lg:absolute -top-2 left-0 opacity-25 w-4/5 lg:w-full;
 			mix-blend-mode: soft-light;
 		}
 
