@@ -182,7 +182,7 @@
     .wp-block-table {
 
         table {
-            @apply table w-full text-base;
+            @apply table w-full text-base rounded-xl shadow-xl;
 
             thead,
             tfoot {
