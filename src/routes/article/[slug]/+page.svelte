@@ -10,6 +10,28 @@
 	export const post = data.post;
 
 	const timeToRead = readingTime(stripHtml(post.content).result, 150, 'fr');
+
+	let featuredImage = {
+		url: '',
+		width: 0,
+		height: 0
+	}
+
+	if(post.featuredImage) {
+		featuredImage = {
+			url: post.featuredImage.node.mediaItemUrl,
+			width: post.featuredImage.node.mediaDetails.width,
+			height: post.featuredImage.node.mediaDetails.height
+		}
+
+		if(post.featuredImage.node.mediaDetails.sizes) {
+			featuredImage = {
+				url: post.featuredImage.node.mediaDetails.sizes[0].sourceUrl,
+				width: post.featuredImage.node.mediaDetails.sizes[0].width,
+				height: post.featuredImage.node.mediaDetails.sizes[0].height
+			}
+		}
+	}
 </script>
 
 <SEO {...data.seo} />
@@ -98,11 +120,11 @@
 		<h1>{post.title}</h1>
 		{#if post.featuredImage}
 			<img
-				src={post.featuredImage.node.mediaDetails.sizes[0].sourceUrl}
+				src={featuredImage.url}
 				alt={(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}
 				class="rounded-xl w-full h-full"
-				width={post.featuredImage.node.mediaDetails.sizes[0].width}
-				height={post.featuredImage.node.mediaDetails.sizes[0].height}
+				width={featuredImage.width}
+				height={featuredImage.height}
 
 			/>
 		{/if}
