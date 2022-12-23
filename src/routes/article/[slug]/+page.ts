@@ -25,6 +25,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
               width
             }
             mediaItemUrl
+            caption
           }
         }
         categories {

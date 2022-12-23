@@ -119,14 +119,19 @@
 		</div>
 		<h1>{post.title}</h1>
 		{#if post.featuredImage}
-			<img
-				src={featuredImage.url}
-				alt={(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}
-				class="rounded-xl w-full h-full"
-				width={featuredImage.width}
-				height={featuredImage.height}
+			<figure id="post-thumbnail">
+				<img
+					src={featuredImage.url}
+					alt={(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}
+					class="rounded-xl w-full h-full"
+					width={featuredImage.width}
+					height={featuredImage.height}
 
-			/>
+				/>
+				{#if post.featuredImage.node.caption}
+					<figcaption>{@html post.featuredImage.node.caption}</figcaption>
+				{/if}
+			</figure>			
 		{/if}
 		<div id="content">
 			{@html post.content}
@@ -243,6 +248,12 @@
 		h1 {
 			@apply text-4xl sm:text-6xl font-bold text-center mb-12 mt-2;
 			line-height: 1.25;
+		}
+
+		#post-thumbnail {
+			figcaption {
+				@apply text-base text-gray-400 mt-4 text-center;
+			}
 		}
 
 		.author {
