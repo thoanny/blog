@@ -3,8 +3,8 @@
 
 	const limit = 4;
 
-	$: featuredPosts = posts.length >= limit+1 ? posts.slice(0, limit) : [];
-	$: otherPosts = posts.length >= limit+1 ? posts.slice(limit, -1) : posts;
+	const featuredPosts = posts.length >= limit+1 ? posts.slice(0, limit) : [];
+	const otherPosts = posts.length >= limit+1 ? posts.slice(limit) : posts;
 </script>
 
 <div>
