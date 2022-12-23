@@ -15,10 +15,12 @@ export const load: PageLoad = async ({ params, fetch }) => {
         featuredImage {
           node {
             altText
-            mediaItemUrl
             mediaDetails {
-              width
-              height
+              sizes(include: LARGE) {
+                height
+                width
+                sourceUrl
+              }
             }
           }
         }

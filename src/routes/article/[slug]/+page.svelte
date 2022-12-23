@@ -98,9 +98,12 @@
 		<h1>{post.title}</h1>
 		{#if post.featuredImage}
 			<img
-				src={post.featuredImage.node.mediaItemUrl}
-				alt={post.featuredImage.node.altText}
+				src={post.featuredImage.node.mediaDetails.sizes[0].sourceUrl}
+				alt={(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}
 				class="rounded-xl w-full h-full"
+				width={post.featuredImage.node.mediaDetails.sizes[0].width}
+				height={post.featuredImage.node.mediaDetails.sizes[0].height}
+
 			/>
 		{/if}
 		<div id="content">
@@ -217,6 +220,7 @@
 
 		h1 {
 			@apply text-4xl sm:text-6xl font-bold text-center mb-12 mt-2;
+			line-height: 1.25;
 		}
 
 		.author {
