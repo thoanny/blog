@@ -41,10 +41,12 @@
 					{#if post.featuredImage}
 						<figure class="w-full md:w-48 shrink-0 self-start">
 							<img
-								src={post.featuredImage.node.mediaItemUrl}
+								src={post.featuredImage.node.mediaDetails.sizes[0].sourceUrl}
 								class="object-cover w-full h-full rounded-xl aspect-video md:aspect-square"
-								alt="{post.title}"
+								alt="{(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}"
 								loading="lazy"
+								width={post.featuredImage.node.mediaDetails.sizes[0].width}
+								height={post.featuredImage.node.mediaDetails.sizes[0].height}
 							/>
 						</figure>
 					{/if}
