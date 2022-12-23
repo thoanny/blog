@@ -3,8 +3,8 @@
 
 	const limit = 4;
 
-	$: featuredPosts = posts.length >= limit ? posts.slice(0, limit) : [];
-	$: otherPosts = posts.length >= limit ? posts.slice(limit, -1) : posts;
+	$: featuredPosts = posts.length >= limit+1 ? posts.slice(0, limit) : [];
+	$: otherPosts = posts.length >= limit+1 ? posts.slice(limit, -1) : posts;
 </script>
 
 <div>
@@ -15,9 +15,11 @@
 					{#if post.featuredImage}
 						<figure>
 							<img
-								src={post.featuredImage.node.mediaItemUrl}
+								src={post.featuredImage.node.mediaDetails.sizes[0].sourceUrl}
 								class="object-cover w-full h-full"
-								alt="Shoes"
+								alt="{(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}"
+								width={post.featuredImage.node.mediaDetails.sizes[0].width}
+								height={post.featuredImage.node.mediaDetails.sizes[0].height}
 							/>
 						</figure>
 					{/if}
