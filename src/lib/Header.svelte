@@ -26,7 +26,7 @@
 
 <style lang="scss">
 	header {
-		@apply relative h-32 bg-primary px-4 overflow-hidden;
+		@apply relative h-24 sm:h-32 bg-primary px-4 overflow-hidden;
 
 		&.post {
 			@screen xl {
@@ -36,7 +36,7 @@
 		}
 
 		.logo {
-			@apply relative h-36 lg:absolute -top-2 left-0 opacity-25 w-4/5 lg:w-full;
+			@apply relative h-28 sm:h-36 lg:absolute -top-2 left-0 opacity-25 w-4/5 lg:w-auto;
 			mix-blend-mode: soft-light;
 		}
 

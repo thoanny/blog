@@ -33,7 +33,7 @@
 			<Footer menu={data.menu?.FOOTER} />
 			<label
 				for="drawer-menu"
-				class="btn btn-accent btn-circle drawer-button lg:hidden absolute top-10 right-4 border border-primary shadow"
+				class="btn btn-accent btn-circle drawer-button lg:hidden absolute top-6 sm:top-10 right-4 border border-primary shadow"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
