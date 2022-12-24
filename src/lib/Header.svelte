@@ -1,8 +1,9 @@
 <script lang="ts">
+	import { page, navigating } from '$app/stores';
 	export let menu;
 </script>
 
-<header>
+<header class={$page.route.id === '/article/[slug]' && !$navigating ? 'post' : ''}>
 	<div class="container h-full !my-0">
 		<div class="logo">
 			<img src="/logo.svg" class="w-full h-full" alt="Thoanny" />
@@ -26,6 +27,13 @@
 <style lang="scss">
 	header {
 		@apply relative h-32 bg-primary px-4 overflow-hidden;
+
+		&.post {
+			@screen xl {
+				@apply overflow-visible;
+				height: 80vh;
+			}
+		}
 
 		.logo {
 			@apply relative h-36 lg:absolute -top-2 left-0 opacity-25 w-4/5 lg:w-full;

@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { stripHtml } from 'string-strip-html';
-	import { readingTime } from 'reading-time-estimator';
 	import type { PageData } from './$types';
+	import { page } from '$app/stores';
+	import { browser } from '$app/environment';
+	import { readingTime } from 'reading-time-estimator';
+	import ClipboardJS from 'clipboard';
 
 	import SEO from '$lib/SEO.svelte';
 	import AddComment from '$lib/AddComment.svelte';
@@ -15,22 +18,29 @@
 		url: '',
 		width: 0,
 		height: 0
-	}
+	};
 
-	if(post.featuredImage) {
+	if (post.featuredImage) {
 		featuredImage = {
 			url: post.featuredImage.node.mediaItemUrl,
 			width: post.featuredImage.node.mediaDetails.width,
 			height: post.featuredImage.node.mediaDetails.height
-		}
+		};
 
-		if(post.featuredImage.node.mediaDetails.sizes) {
+		if (post.featuredImage.node.mediaDetails.sizes) {
 			featuredImage = {
 				url: post.featuredImage.node.mediaDetails.sizes[0].sourceUrl,
 				width: post.featuredImage.node.mediaDetails.sizes[0].width,
 				height: post.featuredImage.node.mediaDetails.sizes[0].height
-			}
+			};
 		}
+	}
+
+	const url = new URL($page.url);
+	const cleanUrl = `${url.protocol}//${url.host}${url.pathname}`;
+
+	if (browser) {
+		new ClipboardJS('.btn.clipboard');
 	}
 </script>
 
@@ -38,101 +48,157 @@
 
 <div>
 	<article>
-		<div class="metas metas--header">
-			<span class="date flex items-center gap-1">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="w-5 h-5"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
-					/>
-				</svg>
-				{new Date(Date.parse(post.date))
-					.toLocaleDateString('FR-fr', { year: 'numeric', month: 'short', day: 'numeric' })
-					.toUpperCase()}
-			</span>
-			{#if post.categories}
-				<span class="categories flex items-center gap-1">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="w-5 h-5"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"
+		<header class="">
+			<div class="flex flex-col xl:flex-row gap-8 items-end flex-col-reverse">
+				{#if post.featuredImage}
+					<figure id="post-thumbnail" class="w-full xl:max-w-2xl shrink-0 xl:-ml-8">
+						<img
+							src={featuredImage.url}
+							alt={post.featuredImage.node.altText ? post.featuredImage.node.altText : post.title}
+							class="w-full h-full rounded-2xl aspect-video object-cover xl:shadow-xl"
+							width={featuredImage.width}
+							height={featuredImage.height}
 						/>
-					</svg>
-					{#each post.categories.nodes as category}
-						<a href="/categorie/{category.slug}">{category.name}</a>
-					{/each}
-				</span>
-			{/if}
-			{#if post.commentCount > 0}
-				<a href="#comments" class="flex items-center gap-1">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						class="w-5 h-5"
-					>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
-						/>
-					</svg>
-					{post.commentCount}
-					{post.commentCount < 2 ? 'commentaire' : 'commentaires'}
-				</a>
-			{/if}
-			<span class="flex items-center gap-1">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					class="w-5 h-5"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-					/>
-				</svg>
-				{timeToRead.minutes} min. à lire
-			</span>
-		</div>
-		<h1>{post.title}</h1>
-		{#if post.featuredImage}
-			<figure id="post-thumbnail">
-				<img
-					src={featuredImage.url}
-					alt={(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}
-					class="rounded-xl w-full h-full"
-					width={featuredImage.width}
-					height={featuredImage.height}
-
-				/>
-				{#if post.featuredImage.node.caption}
-					<figcaption>{@html post.featuredImage.node.caption}</figcaption>
+					</figure>
 				{/if}
-			</figure>			
-		{/if}
+
+				<div
+					class="flex gap-6 xl:gap-8 flex-col items-end justify-start xl:mb-6 pr-4 xl:mt-6 w-full"
+				>
+					<h1 class="w-full text-3xl font-bold leading-12 xl:text-white text-center xl:text-left">
+						{post.title}
+					</h1>
+					<ul class="metas w-full justify-center xl:justify-start">
+						<li>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-5 h-5"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z"
+								/>
+							</svg>
+							{new Date(Date.parse(post.date)).toLocaleDateString('FR-fr', {
+								year: 'numeric',
+								month: 'short',
+								day: 'numeric'
+							})}
+						</li>
+						{#if post.categories}
+							<li>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="w-5 h-5"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M3.75 9.776c.112-.017.227-.026.344-.026h15.812c.117 0 .232.009.344.026m-16.5 0a2.25 2.25 0 00-1.883 2.542l.857 6a2.25 2.25 0 002.227 1.932H19.05a2.25 2.25 0 002.227-1.932l.857-6a2.25 2.25 0 00-1.883-2.542m-16.5 0V6A2.25 2.25 0 016 3.75h3.879a1.5 1.5 0 011.06.44l2.122 2.12a1.5 1.5 0 001.06.44H18A2.25 2.25 0 0120.25 9v.776"
+									/>
+								</svg>
+								{#each post.categories.nodes as category}
+									<a href="/categorie/{category.slug}">{category.name}</a>
+								{/each}
+							</li>
+						{/if}
+						{#if post.commentCount > 0}
+							<li>
+								<a href="#comments" class="flex items-center gap-1">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke-width="1.5"
+										stroke="currentColor"
+										class="w-5 h-5"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+										/>
+									</svg>
+									{post.commentCount}
+									{post.commentCount < 2 ? 'commentaire' : 'commentaires'}
+								</a>
+							</li>
+						{/if}
+						<li>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke-width="1.5"
+								stroke="currentColor"
+								class="w-5 h-5"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+								/>
+							</svg>
+							{timeToRead.minutes} min. à lire
+						</li>
+					</ul>
+					<ul class="w-full hidden xl:flex gap-2 items-center justify-center xl:justify-start">
+						<li>
+							<a
+								href="https://twitter.com/intent/tweet?url={encodeURIComponent(
+									cleanUrl
+								)}&text={encodeURIComponent(post.title)}&via=thoanny_"
+								rel="noopener noreferrer"
+								target="_blank"
+								class="btn btn-circle btn-secondary text-white"
+								><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-5 w-5"
+									><path
+										fill="currentColor"
+										d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+									/></svg
+								></a
+							>
+						</li>
+						<li>
+							<a
+								href="https://www.facebook.com/sharer.php?u={encodeURIComponent(cleanUrl)}"
+								rel="noopener noreferrer"
+								target="_blank"
+								class="btn btn-circle btn-secondary text-white"
+								><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="h-5 w-5"
+									><path
+										fill="currentColor"
+										d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"
+									/></svg
+								></a
+							>
+						</li>
+						<li>
+							<button
+								class="btn btn-circle btn-secondary text-white clipboard"
+								data-clipboard-text={cleanUrl}
+							>
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="h-5 w-5">
+									<path
+										fill="currentColor"
+										d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"
+									/>
+								</svg>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</header>
 		<div id="content">
 			{@html post.content}
 		</div>
@@ -145,7 +211,7 @@
 				{/if}
 			</div>
 		{/if}
-		<div class="metas">
+		<div>
 			{#if post.tags}
 				<span class="tags text-sm flex flex-wrap justify-center gap-4">
 					{#each post.tags.nodes as tag}
@@ -226,33 +292,25 @@
 	article {
 		@apply text-lg;
 
-		.metas {
-			@apply flex flex-wrap justify-center gap-4 whitespace-nowrap;
+		@screen xl {
+			margin-top: calc(-80vh + 8rem);
+		}
 
-			&--header {
-				@apply text-sm uppercase font-semibold text-gray-900 mb-4;
+		.metas {
+			@apply flex flex-wrap gap-4 whitespace-nowrap text-sm uppercase font-semibold text-gray-500 xl:text-white;
+
+			li {
+				@apply flex gap-2;
 
 				svg {
-					@apply text-gray-400;
-				}
-
-				a {
-					&:hover,
-					&:active {
-						@apply text-gray-600;
-					}
+					@apply text-gray-400 xl:text-white;
 				}
 			}
 		}
 
-		h1 {
-			@apply text-4xl sm:text-6xl font-bold text-center mb-12 mt-2;
-			line-height: 1.25;
-		}
-
-		#post-thumbnail {
-			figcaption {
-				@apply text-base text-gray-400 mt-4 text-center;
+		#content {
+			@screen xl {
+				@apply bg-white pt-16 rounded-2xl -mt-12;
 			}
 		}
 
