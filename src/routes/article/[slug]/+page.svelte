@@ -293,7 +293,7 @@
 		@apply text-lg;
 
 		@screen xl {
-			margin-top: calc(-80vh + 8rem);
+			margin-top: calc(-37rem + 8rem);
 		}
 
 		.metas {

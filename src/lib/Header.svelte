@@ -31,7 +31,7 @@
 		&.post {
 			@screen xl {
 				@apply overflow-visible;
-				height: 80vh;
+				height: 37rem;
 			}
 		}
 
