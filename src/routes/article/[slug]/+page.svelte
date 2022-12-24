@@ -42,6 +42,16 @@
 	if (browser) {
 		new ClipboardJS('.btn.clipboard');
 	}
+
+	const nbsp = (str: String) =>
+		str.replace(/\s+([:;»!?/])|([«])\s+/g, (m, l, r) => {
+			if (l) {
+				return `\xa0${l}`;
+			}
+			if (r) {
+				return `${r}\xa0`;
+			}
+		});
 </script>
 
 <SEO {...data.seo} />
@@ -66,7 +76,7 @@
 					class="flex gap-6 xl:gap-8 flex-col items-end justify-start xl:mb-6 pr-4 xl:mt-6 w-full"
 				>
 					<h1 class="w-full text-3xl font-bold leading-12 xl:text-white text-center xl:text-left">
-						{post.title}
+						{nbsp(post.title)}
 					</h1>
 					<ul class="metas w-full justify-center xl:justify-start">
 						<li>
@@ -200,7 +210,7 @@
 			</div>
 		</header>
 		<div id="content">
-			{@html post.content}
+			{@html nbsp(post.content)}
 		</div>
 		{#if post.author}
 			<div class="author">
