@@ -16,7 +16,7 @@
 	}
 </script>
 
-<main>
+<main class="dark:bg-zinc-900">
 	<div class="drawer">
 		<input id="drawer-menu" type="checkbox" class="drawer-toggle" bind:checked={menuDrawerOpen} />
 		<div class="drawer-content">
@@ -24,7 +24,9 @@
 			<div class="container">
 				{#if $navigating}
 					<div class="mx-auto my-12 flex justify-center">
-						<button class="btn btn-outline loading">Chargement...</button>
+						<button class="btn btn-outline loading dark:border-gray-200 dark:text-gray-200"
+							>Chargement...</button
+						>
 					</div>
 				{:else}
 					<slot />
@@ -33,7 +35,7 @@
 			<Footer menu={data.menu?.FOOTER} />
 			<label
 				for="drawer-menu"
-				class="btn btn-accent btn-circle drawer-button lg:hidden absolute top-6 sm:top-10 right-4 border border-primary shadow"
+				class="btn bg-white btn-circle drawer-button lg:hidden absolute top-6 sm:top-10 right-4 border border-primary shadow"
 				><svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"

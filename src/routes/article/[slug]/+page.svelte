@@ -169,7 +169,7 @@
 								)}&text={encodeURIComponent(post.title)}&via=thoanny_"
 								rel="noopener noreferrer"
 								target="_blank"
-								class="btn btn-circle btn-secondary text-white"
+								class="btn btn-circle btn-secondary text-white dark:text-gray-900"
 								><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="h-5 w-5"
 									><path
 										fill="currentColor"
@@ -183,7 +183,7 @@
 								href="https://www.facebook.com/sharer.php?u={encodeURIComponent(cleanUrl)}"
 								rel="noopener noreferrer"
 								target="_blank"
-								class="btn btn-circle btn-secondary text-white"
+								class="btn btn-circle btn-secondary text-white dark:text-gray-900"
 								><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="h-5 w-5"
 									><path
 										fill="currentColor"
@@ -194,7 +194,7 @@
 						</li>
 						<li>
 							<button
-								class="btn btn-circle btn-secondary text-white clipboard"
+								class="btn btn-circle btn-secondary text-white dark:text-gray-900 clipboard"
 								data-clipboard-text={cleanUrl}
 							>
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" class="h-5 w-5">
@@ -225,7 +225,11 @@
 			{#if post.tags}
 				<span class="tags text-sm flex flex-wrap justify-center gap-4">
 					{#each post.tags.nodes as tag}
-						<a href="/mot-cle/{tag.slug}" class="btn btn-sm btn-outline rounded-full">{tag.name}</a>
+						<a
+							href="/mot-cle/{tag.slug}"
+							class="btn btn-sm btn-outline dark:border-gray-200 dark:text-gray-200 rounded-full"
+							>{tag.name}</a
+						>
 					{/each}
 				</span>
 			{/if}
@@ -320,12 +324,12 @@
 
 		#content {
 			@screen xl {
-				@apply bg-white pt-16 rounded-2xl -mt-12;
+				@apply bg-white dark:bg-zinc-900 pt-16 rounded-2xl -mt-12 dark:text-gray-200;
 			}
 		}
 
 		.author {
-			@apply my-12 mx-auto text-center;
+			@apply my-12 mx-auto text-center dark:text-gray-200;
 
 			img {
 				@apply mx-auto mb-4;

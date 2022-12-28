@@ -135,13 +135,17 @@
         @apply bg-primary p-6 rounded-xl flex justify-center gap-4 items-center text-white;
 
         .wp-element-button {
-            @apply btn btn-accent;
+            @apply btn bg-white;
         }
     }
 
     .wp-block-media-text {
-        @apply flex flex-col gap-4 md:grid md:gap-8;
+        @apply flex flex-col gap-4;
         grid-template-columns: 50% auto;
+
+        @screen md {
+            @apply grid gap-8;
+        }
 
         img {
             @apply rounded-xl;

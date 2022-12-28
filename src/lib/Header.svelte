@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { page, navigating } from '$app/stores';
+	import ThemeSwitcher from './ThemeSwitcher.svelte';
 	export let menu;
 </script>
 
-<header class={$page.route.id === '/article/[slug]' && !$navigating ? 'post' : ''}>
+<header
+	class="bg-primary dark:bg-accent {$page.route.id === '/article/[slug]' && !$navigating
+		? 'post'
+		: ''}"
+>
 	<div class="container h-full !my-0">
 		<div class="logo">
 			<img src="/logo.svg" class="w-full h-full" alt="Thoanny" />
@@ -14,11 +19,12 @@
 					<a href={item.uri} target={item.target} class={item.cssClasses.join(' ')}>{item.label}</a>
 				{/each}
 				<a
-					class="btn btn-accent rounded-full"
+					class="btn bg-white border-white text-black hover:text-white rounded-full"
 					href="https://ko-fi.com/thoanny"
 					target="_blank"
 					rel="noreferrer">☕ Me soutenir</a
 				>
+				<!-- <ThemeSwitcher /> -->
 			</nav>
 		{/if}
 	</div>
@@ -26,7 +32,7 @@
 
 <style lang="scss">
 	header {
-		@apply relative h-24 sm:h-32 bg-primary px-4 overflow-hidden;
+		@apply relative h-24 sm:h-32 px-4 overflow-hidden;
 
 		&.post {
 			@screen xl {

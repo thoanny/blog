@@ -47,7 +47,7 @@
 	</div>
 	<hr />
 	<div class="flex flex-col sm:flex-row gap-4 justify-center sm:justify-between text-sm">
-		<div class="text-center sm:text-left">
+		<div class="text-center sm:text-left dark:text-gray-400">
 			Thoanny &copy; {new Date().toLocaleDateString('FR-fr', { year: 'numeric' })}
 		</div>
 		{#if menu}
@@ -62,11 +62,13 @@
 
 <style lang="scss">
 	footer {
+		@apply dark:text-gray-400;
+
 		.social-links {
 			@apply flex justify-center sm:justify-end gap-4;
 
 			a {
-				@apply btn btn-circle btn-outline gap-2;
+				@apply btn btn-circle btn-outline gap-2 dark:border-gray-200 dark:text-gray-200;
 
 				svg {
 					@apply h-6 w-6;
@@ -75,7 +77,7 @@
 		}
 
 		hr {
-			@apply my-8 border-gray-200;
+			@apply my-8 border-gray-200 dark:border-gray-600;
 		}
 
 		nav {

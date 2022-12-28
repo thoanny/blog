@@ -3,8 +3,8 @@
 
 	const limit = 4;
 
-	const featuredPosts = posts.length >= limit+1 ? posts.slice(0, limit) : [];
-	const otherPosts = posts.length >= limit+1 ? posts.slice(limit) : posts;
+	const featuredPosts = posts.length >= limit + 1 ? posts.slice(0, limit) : [];
+	const otherPosts = posts.length >= limit + 1 ? posts.slice(limit) : posts;
 </script>
 
 <div>
@@ -17,7 +17,7 @@
 							<img
 								src={post.featuredImage.node.mediaDetails.sizes[0].sourceUrl}
 								class="object-cover w-full h-full"
-								alt="{(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}"
+								alt={post.featuredImage.node.altText ? post.featuredImage.node.altText : post.title}
 								width={post.featuredImage.node.mediaDetails.sizes[0].width}
 								height={post.featuredImage.node.mediaDetails.sizes[0].height}
 							/>
@@ -39,20 +39,23 @@
 
 		<div class="mt-8">
 			{#each otherPosts as post}
-				<a class="flex flex-col md:flex-row gap-4 md:gap-8 mt-6 items-center post-block" href="/article/{post.slug}">
+				<a
+					class="flex flex-col md:flex-row gap-4 md:gap-8 mt-6 items-center post-block"
+					href="/article/{post.slug}"
+				>
 					{#if post.featuredImage}
 						<figure class="w-full md:w-48 shrink-0 self-start">
 							<img
 								src={post.featuredImage.node.mediaDetails.sizes[0].sourceUrl}
 								class="object-cover w-full h-full rounded-xl aspect-video md:aspect-square"
-								alt="{(post.featuredImage.node.altText)?post.featuredImage.node.altText:post.title}"
+								alt={post.featuredImage.node.altText ? post.featuredImage.node.altText : post.title}
 								loading="lazy"
 								width={post.featuredImage.node.mediaDetails.sizes[0].width}
 								height={post.featuredImage.node.mediaDetails.sizes[0].height}
 							/>
 						</figure>
 					{/if}
-					<div class="w-full flex flex-col gap-2">
+					<div class="w-full flex flex-col gap-2 dark:text-gray-200">
 						<h2 class="text-lg font-bold">{post.title}</h2>
 						{@html post.excerpt}
 						<div class="metas">

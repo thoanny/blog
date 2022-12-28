@@ -114,7 +114,9 @@
 		</div>
 	{:else}
 		<form
-			class="shadow-xl rounded-xl p-4 border {commentSuccess ? 'hidden' : ''}"
+			class="shadow-xl rounded-xl p-4 border dark:border-gray-600 dark:text-gray-200 {commentSuccess
+				? 'hidden'
+				: ''}"
 			on:submit={handleSubmit}
 			autocomplete="off"
 		>
@@ -145,7 +147,7 @@
 			<div class="flex gap-4">
 				<div class="form-control w-full">
 					<label class="label required" for="name">
-						<span class="label-text">Pseudonyme</span>
+						<span class="label-text dark:text-gray-200">Pseudonyme</span>
 					</label>
 					<input
 						type="text"
@@ -165,7 +167,7 @@
 				</div>
 				<div class="form-control w-full">
 					<label class="label" for="email">
-						<span class="label-text">Adresse e-mail</span>
+						<span class="label-text dark:text-gray-200">Adresse e-mail</span>
 					</label>
 					<input
 						type="text"
@@ -186,7 +188,7 @@
 			</div>
 			<div class="form-control">
 				<label class="label required" for="content">
-					<span class="label-text">Commentaire</span>
+					<span class="label-text dark:text-gray-200">Commentaire</span>
 				</label>
 				<textarea
 					class="textarea textarea-bordered h-36"
@@ -217,7 +219,9 @@
 			<div class="form-control">
 				<label class="label cursor-pointer justify-start gap-2">
 					<input type="checkbox" class="toggle toggle-primary" required />
-					<span class="label-text">J'accepte la politique de confidentialité</span>
+					<span class="label-text dark:text-gray-200"
+						>J'accepte la politique de confidentialité</span
+					>
 				</label>
 			</div>
 

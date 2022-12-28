@@ -9,7 +9,7 @@
 </svelte:head>
 
 <div>
-	<h1 class="text-4xl mb-6 font-bold">Mot-clé&nbsp;: {data.tag}</h1>
+	<h1 class="text-4xl mb-6 font-bold dark:text-gray-200">Mot-clé&nbsp;: {data.tag}</h1>
 	{#if data.posts.length > 0}
 		<Posts {...data} />
 	{:else}

@@ -9,7 +9,7 @@
 </svelte:head>
 
 <div>
-	<h1 class="text-4xl mb-6 font-bold">Catégorie&nbsp;: {data.category}</h1>
+	<h1 class="text-4xl mb-6 font-bold dark:text-gray-200">Catégorie&nbsp;: {data.category}</h1>
 	{#if data.posts.length > 0}
 		<Posts {...data} />
 	{:else}

@@ -4,6 +4,7 @@ module.exports = {
   theme: {
     extend: {},
   },
+  darkMode: 'class',
   plugins: [
     require("daisyui"),
     require('@tailwindcss/typography'),
@@ -14,7 +15,7 @@ module.exports = {
         thoannylight: {
           "primary": "#93C045",
           "secondary": "#81AA39",
-          "accent": "#ffffff",
+          "accent": "#344417",
           "neutral": "#3D4451",
           "base-100": "#FFFFFF",
           "info": "#3ABFF8",
