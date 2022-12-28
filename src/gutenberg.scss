@@ -21,6 +21,14 @@
         }
     }
 
+    ul {
+        @apply list-disc pl-6;
+    }
+
+    ol {
+        @apply list-decimal pl-6;
+    }
+
     h1,
     h2,
     h3,
