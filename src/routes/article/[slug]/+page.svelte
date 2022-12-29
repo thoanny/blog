@@ -69,28 +69,30 @@
 							width={featuredImage.width}
 							height={featuredImage.height}
 						/>
-						<div
-							class="flex xl:hidden text-sm text-gray-400 gap-2 shrink-0 justify-center mb-6 mt-4"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 20 20"
-								fill="currentColor"
-								class="w-5 h-5"
+						{#if post.featuredImage.node.caption}
+							<div
+								class="flex xl:hidden text-sm text-gray-400 gap-2 shrink-0 justify-center mb-6 mt-4"
 							>
-								<path
-									fill-rule="evenodd"
-									d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
-									clip-rule="evenodd"
-								/>
-							</svg>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+									class="w-5 h-5"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
+										clip-rule="evenodd"
+									/>
+								</svg>
 
-							<div>
-								{@html stripHtml(post.featuredImage.node.caption, {
-									ignoreTagsWithTheirContents: ['em']
-								}).result}
+								<div>
+									{@html stripHtml(post.featuredImage.node.caption, {
+										ignoreTagsWithTheirContents: ['em']
+									}).result}
+								</div>
 							</div>
-						</div>
+						{/if}
 					</figure>
 				{/if}
 
@@ -100,7 +102,7 @@
 					<h1 class="w-full text-3xl font-bold leading-12 xl:text-white text-center xl:text-left">
 						{nbsp(post.title)}
 					</h1>
-					{#if post.featuredImage}
+					{#if post.featuredImage && post.featuredImage.node.caption}
 						<div class="hidden xl:flex text-sm text-white gap-2 opacity-75">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
