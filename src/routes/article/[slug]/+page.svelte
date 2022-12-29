@@ -61,7 +61,7 @@
 		<header class="">
 			<div class="flex flex-col xl:flex-row gap-8 items-end flex-col-reverse">
 				{#if post.featuredImage}
-					<figure id="post-thumbnail" class="w-full xl:max-w-2xl shrink-0 xl:-ml-8">
+					<figure id="post-thumbnail" class="w-full xl:max-w-2xl shrink-0 xl:-ml-8 relative">
 						<img
 							src={featuredImage.url}
 							alt={post.featuredImage.node.altText ? post.featuredImage.node.altText : post.title}
@@ -69,15 +69,58 @@
 							width={featuredImage.width}
 							height={featuredImage.height}
 						/>
+						<div
+							class="flex xl:hidden text-sm text-gray-400 gap-2 shrink-0 justify-center mb-6 mt-4"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								class="w-5 h-5"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M10 17a.75.75 0 01-.75-.75V5.612L5.29 9.77a.75.75 0 01-1.08-1.04l5.25-5.5a.75.75 0 011.08 0l5.25 5.5a.75.75 0 11-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0110 17z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+
+							<div>
+								{@html stripHtml(post.featuredImage.node.caption, {
+									ignoreTagsWithTheirContents: ['em']
+								}).result}
+							</div>
+						</div>
 					</figure>
 				{/if}
 
 				<div
-					class="flex gap-6 xl:gap-8 flex-col items-end justify-start xl:mb-6 pr-4 xl:mt-6 w-full"
+					class="flex gap-6 xl:gap-6 flex-col items-end justify-start xl:mb-6 pr-4 xl:mt-6 w-full"
 				>
 					<h1 class="w-full text-3xl font-bold leading-12 xl:text-white text-center xl:text-left">
 						{nbsp(post.title)}
 					</h1>
+					{#if post.featuredImage}
+						<div class="hidden xl:flex text-sm text-white gap-2 opacity-75">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								class="w-5 h-5 inline shrink-0"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+							<div>
+								{@html stripHtml(post.featuredImage.node.caption, {
+									ignoreTagsWithTheirContents: ['em']
+								}).result}
+							</div>
+						</div>
+					{/if}
 					<ul class="metas w-full justify-center xl:justify-start">
 						<li>
 							<svg
