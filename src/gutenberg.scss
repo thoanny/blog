@@ -115,19 +115,21 @@
 
         &:before,
         &:after {
-            @apply h-12 w-12 block opacity-50 absolute;
-            content: '';
+            @apply block absolute text-primary;
             z-index: -1;
+            font-family: Arial;
+            font-size: 6rem;
+            line-height: 0;
         }
 
         &:before {
-            @apply top-0 left-0;
-            background: url('/quote-left-solid.svg') no-repeat 0 0;
+            @apply top-10 left-0;
+            content: "“";
         }
 
         &:after {
-            @apply bottom-0 -right-2;
-            background: url('/quote-right-solid.svg') no-repeat 0 0;
+            @apply -bottom-1 -right-2;
+            content: "”";
         }
 
         cite {
