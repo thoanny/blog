@@ -1,7 +1,10 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import SEO from '$lib/SEO.svelte';
 	export let data: PageData;
 </script>
+
+<SEO title="Twitch" />
 
 <template>
 	<div id="twitch-player">
