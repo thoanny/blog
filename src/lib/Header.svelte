@@ -5,7 +5,9 @@
 </script>
 
 <header
-	class="bg-primary dark:bg-accent {$page.route.id === '/article/[slug]' && !$navigating
+	class="bg-primary dark:bg-accent {($page.route.id === '/article/[slug]' ||
+		$page.route.id === '/twitch') &&
+	!$navigating
 		? 'post'
 		: ''}"
 >
@@ -18,6 +20,7 @@
 				{#each menu as item}
 					<a href={item.uri} target={item.target} class={item.cssClasses.join(' ')}>{item.label}</a>
 				{/each}
+				<a href="/twitch">📺 Twitch</a>
 				<a
 					class="btn bg-white border-white text-black hover:text-white rounded-full"
 					href="https://ko-fi.com/thoanny"
