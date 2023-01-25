@@ -12,7 +12,6 @@ export const load: PageLoad = async ({ params, fetch }) => {
     const giftsRes = await fetch('https://anthony-destenay.fr/projects/open-space/twitch/gifts.php');
     if (giftsRes.ok) {
         gifts = await giftsRes.json();
-        console.log(gifts)
     }
 
     return {

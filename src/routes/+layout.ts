@@ -63,8 +63,8 @@ export const load: LayoutLoad = async ({ fetch }) => {
         }
     }
 
-    checkTwitchStatus();
-    setInterval(() => checkTwitchStatus(), 300000);
+    // checkTwitchStatus();
+    // setInterval(() => checkTwitchStatus(), 300000);
 
     return {
         menu: menu,
