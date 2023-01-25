@@ -6,12 +6,12 @@
 <template>
 	<div id="twitch-player">
 		<iframe
-			src="https://player.twitch.tv/?thoanny&html5&parent=thoanny.fr"
+			src="https://player.twitch.tv/?channel=thoanny&parent=thoanny.fr"
 			height="1080"
 			width="1920"
 			allowfullscreen
 			title="Thoanny"
-			class="aspect-video w-full h-full rounded-xl overflow-hidden"
+			class="aspect-video w-full h-full rounded-xl overflow-hidden shadow"
 		/>
 	</div>
 	<div class="mx-auto max-w-2xl text-center mb-12">
