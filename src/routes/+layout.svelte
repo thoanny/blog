@@ -6,8 +6,16 @@
 	import Header from '$lib/Header.svelte';
 	import Footer from '$lib/Footer.svelte';
 
+	import { twitchStore } from '../stores';
+
 	import type { PageData } from './$types';
 	export let data: PageData;
+
+	let twitch;
+
+	twitchStore.subscribe((value) => {
+		twitch = value;
+	});
 
 	let menuDrawerOpen = false;
 
@@ -32,6 +40,52 @@
 					<slot />
 				{/if}
 			</div>
+			{#if twitch.username}
+				<a
+					href="https://twitch.tv/{twitch.username}"
+					target="_blank"
+					rel="noreferrer"
+					class="card card-compact w-96 bg-base-100 shadow-xl image-full absolute bottom-4 right-8 z-20"
+				>
+					<figure><img src={twitch.thumbnail} alt="Shoes" /></figure>
+					<div class="card-body justify-center items-center">
+						<div class="badge badge-twitch uppercase">En live</div>
+						<h2 class="card-title text-center text-white">{twitch.title}</h2>
+						{#if twitch.tags}
+							<div class="card-actions justify-center">
+								{#each twitch.tags as tag}
+									<div class="badge uppercase badge-sm">{tag}</div>
+								{/each}
+							</div>
+						{/if}
+					</div>
+				</a>
+
+				<!-- <div
+					class="card card-compact twitch-card w-80 bg-base-100 shadow-xl absolute bottom-4 right-8 z-20"
+				>
+					<figure><img src={twitch.thumbnail} alt="" class="w-full h-full" /></figure>
+					<div class="card-body">
+						<h2 class="card-title">
+							{twitch.title}
+							<div class="badge badge-secondary">Live</div>
+						</h2>
+						{#if twitch.tags}
+							<div class="card-actions">
+								{#each twitch.tags as tag}
+									<div class="badge badge-outline">{tag}</div>
+								{/each}
+								<div class="badge badge-outline">Products</div>
+							</div>
+						{/if}
+					</div>
+				</div> -->
+
+				<!-- <a class="twitch-online" href="https://twitch.tv/thoanny" target="_blank" rel="noreferrer">
+					<span>En ligne sur Twitch</span>
+					<img src={twitch.thumbnail} alt="" />
+				</a> -->
+			{/if}
 			<Footer menu={data.menu?.FOOTER} />
 			<label
 				for="drawer-menu"
@@ -67,3 +121,24 @@
 		</div>
 	</div>
 </main>
+
+<style lang="scss">
+	.badge-twitch {
+		@apply text-white;
+		background: #9146ff;
+	}
+
+	.card {
+		&.image-full {
+			&:before {
+				@apply bg-black bg-opacity-75;
+			}
+
+			&:hover {
+				&:before {
+					@apply bg-opacity-80;
+				}
+			}
+		}
+	}
+</style>
