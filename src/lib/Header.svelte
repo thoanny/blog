@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page, navigating } from '$app/stores';
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
-	export let menu;
 </script>
 
 <header
@@ -15,21 +14,21 @@
 		<div class="logo">
 			<img src="/logo.svg" class="w-full h-full" alt="Thoanny" />
 		</div>
-		{#if menu}
-			<nav>
-				{#each menu as item}
-					<a href={item.uri} target={item.target} class={item.cssClasses.join(' ')}>{item.label}</a>
-				{/each}
-				<a href="/twitch">📺 Twitch</a>
-				<a
-					class="btn bg-white border-white text-black hover:text-white rounded-full"
-					href="https://ko-fi.com/thoanny"
-					target="_blank"
-					rel="noreferrer">☕ Me soutenir</a
-				>
-				<!-- <ThemeSwitcher /> -->
-			</nav>
-		{/if}
+		<nav>
+			<a href="/">📃 Blog</a>
+			<a href="/categorie/projets">🛠️ Projets</a>
+			<!-- <a href="/categorie/trucs-et-astuces/">💡 Astuces</a> -->
+			<a href="/categorie/jeux-video/">🎮 Jeux vidéo</a>
+			<a href="/categorie/streaming/">🟣 Streaming</a>
+			<a href="/twitch">📺 Twitch</a>
+			<a
+				class="btn bg-white border-white text-black hover:text-white rounded-full"
+				href="https://ko-fi.com/thoanny"
+				target="_blank"
+				rel="noreferrer">☕ Me soutenir</a
+			>
+			<!-- <ThemeSwitcher /> -->
+		</nav>
 	</div>
 </header>
 
