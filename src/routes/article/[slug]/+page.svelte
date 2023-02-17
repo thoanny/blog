@@ -103,7 +103,7 @@
 						{nbsp(post.title)}
 					</h1>
 					{#if post.featuredImage && post.featuredImage.node.caption}
-						<div class="hidden xl:flex text-sm text-white gap-2 opacity-75">
+						<div class="hidden xl:flex text-sm text-white gap-2 opacity-75 w-full">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 20 20"
