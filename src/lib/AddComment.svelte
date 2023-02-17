@@ -114,7 +114,7 @@
 		</div>
 	{:else}
 		<form
-			class="shadow-xl rounded-xl p-4 border dark:border-gray-600 dark:text-gray-200 {commentSuccess
+			class="shadow-xl rounded-xl p-4 border dark:border-gray-600 dark:text-gray-200 bg-white {commentSuccess
 				? 'hidden'
 				: ''}"
 			on:submit={handleSubmit}

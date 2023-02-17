@@ -24,7 +24,7 @@
 	}
 </script>
 
-<main class="dark:bg-zinc-900">
+<main class="dark:bg-zinc-900 bg-gray-100">
 	<div class="drawer">
 		<input id="drawer-menu" type="checkbox" class="drawer-toggle" bind:checked={menuDrawerOpen} />
 		<div class="drawer-content">

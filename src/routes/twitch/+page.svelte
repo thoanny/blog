@@ -31,7 +31,9 @@
 	{#if data.streamelements}
 		<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-6 mb-12">
 			{#each data.streamelements as activity}
-				<div class="flex items-center justify-center text-center border rounded-2xl shadow-lg p-6">
+				<div
+					class="flex items-center justify-center text-center border rounded-2xl shadow-lg p-6 bg-white"
+				>
 					<div>
 						<div class="avatar mb-2">
 							<div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">

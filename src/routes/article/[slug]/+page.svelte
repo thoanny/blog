@@ -369,7 +369,7 @@
 
 		#content {
 			@screen xl {
-				@apply bg-white dark:bg-zinc-900 pt-16 rounded-2xl -mt-12 dark:text-gray-200;
+				@apply bg-gray-100 dark:bg-zinc-900 pt-16 rounded-2xl -mt-12 dark:text-gray-200;
 			}
 		}
 
