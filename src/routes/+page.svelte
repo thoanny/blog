@@ -9,5 +9,5 @@
 
 <div>
 	<h1 class="text-4xl mb-6 font-bold sr-only">Blog</h1>
-	<Posts {...data} />
+	<Posts {...data} hero="true" />
 </div>

@@ -26,6 +26,7 @@ export const load: PageLoad = async ({ fetch }) => {
           categories {
             nodes {
               name
+              slug
             }
           }
           commentCount
